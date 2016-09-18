@@ -2261,7 +2261,7 @@ var _user$project$GraphicSVG$subs = function (model) {
 			_elm_lang$core$Basics_ops['++'],
 			_elm_lang$core$Native_List.fromArray(
 				[
-					A2(_elm_lang$core$Time$every, (1000 / 30) * _elm_lang$core$Time$millisecond, _user$project$GraphicSVG$createTimeMessage),
+					A2(_elm_lang$core$Time$every, (1000 / 60) * _elm_lang$core$Time$millisecond, _user$project$GraphicSVG$createTimeMessage),
 					_elm_lang$window$Window$resizes(_user$project$GraphicSVG$sizeToMsg)
 				]),
 			_user$project$GraphicSVG$keySubs));

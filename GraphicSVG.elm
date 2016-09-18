@@ -82,7 +82,7 @@ gameApp tickMsg input = App.program { init = ((input.model, { initGModel | updat
                                     , subscriptions = subs}
 
 subs model = 
-  Sub.batch ([ Time.every (1000/30*millisecond) (createTimeMessage)
+  Sub.batch ([ Time.every (1000/60*millisecond) (createTimeMessage)
              -- AnimationFrame.times (createTimeMessage timeMsg)
             , Window.resizes sizeToMsg] ++ keySubs)
 

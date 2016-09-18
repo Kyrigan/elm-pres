@@ -35,7 +35,7 @@ view model = let t = model.t
 update message model =
   case message of
     GameTick tick (getKeyState,changeP1,changeP2) -> { model |
-                                       t = tick
+                                       t = model.t + 1 
                               }
     NextSlide -> { model |
     t   = 0 ,
@@ -45,6 +45,36 @@ update message model =
     t   = 0 ,
     idx = max (model.idx - 1) 0
   }
+
+--- MISCELLANEOUS
+
+default t = []
+
+borders = [rect 5000 5000
+              |> filled white
+              |> move (3000,0),
+           rect 5000 5000
+              |> filled white
+              |> move (-3000,0),
+           rect 5000 5000
+              |> filled white
+              |> move (0,2750),
+           rect 5000 5000
+              |> filled white
+              |> move (0,-2750)]
+
+detectors = [rect 5000 5000
+              |> filled white
+              |> makeTransparent 0
+              |> move (2500,0)
+              |> notifyTap NextSlide,
+             rect 5000 5000
+              |> filled black
+              |> makeTransparent 0
+              |> move (-2500,0)
+              |> notifyTap LastSlide]
+
+
 
 -- In between here is where you will find the slides!
 -- To add more slides, simply add them to the list below.
@@ -135,29 +165,3 @@ glowing t = let r = 218 - 90*abs(cos (degrees t))
             in rgb r g b    
 
 -- © Ray Winardi 2016, in memory of 3 hours of his life
-
-default t = []
-
-borders = [rect 5000 5000
-              |> filled white
-              |> move (3000,0),
-           rect 5000 5000
-              |> filled white
-              |> move (-3000,0),
-           rect 5000 5000
-              |> filled white
-              |> move (0,2750),
-           rect 5000 5000
-              |> filled white
-              |> move (0,-2750)]
-
-detectors = [rect 5000 5000
-              |> filled white
-              |> makeTransparent 0
-              |> move (2500,0)
-              |> notifyTap NextSlide,
-             rect 5000 5000
-              |> filled black
-              |> makeTransparent 0
-              |> move (-2500,0)
-              |> notifyTap LastSlide]
