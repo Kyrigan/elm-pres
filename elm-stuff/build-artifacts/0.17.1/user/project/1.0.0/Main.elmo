@@ -584,7 +584,7 @@ var _user$project$Main$slide1 = function (t) {
 			},
 			A2(
 				_user$project$GraphicSVG$filled,
-				_user$project$GraphicSVG$blue,
+				_user$project$GraphicSVG$red,
 				A2(_user$project$GraphicSVG$rect, 1000, 500))),
 			A2(
 			_user$project$GraphicSVG$move,
@@ -595,7 +595,7 @@ var _user$project$Main$slide1 = function (t) {
 			},
 			A2(
 				_user$project$GraphicSVG$filled,
-				_user$project$GraphicSVG$blue,
+				_user$project$GraphicSVG$red,
 				A2(_user$project$GraphicSVG$rect, 1000, 500))),
 			A3(
 			_user$project$Main$appear,
