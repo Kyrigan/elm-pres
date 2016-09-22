@@ -34,9 +34,7 @@ view model = let t = model.t
 update message model =
   case message of
     GameTick tick (getKeyState,changeP1,changeP2) -> { model |
-                                       t = model.t + 4
-                                      -- This is an arbitrary number I found to my liking. 
-                              }
+                                       t = model.t + 4 }
     NextSlide -> { model |
     t   = 0 ,
     idx = min (model.idx + 1) (Array.length slides - 1) 
@@ -76,6 +74,9 @@ detectors = [rect 5000 5000
 
 
 -- FUNCTIONS
+
+loop t n = let y = toFloat (floor (t / n)) -- This function is how I make things loop!
+           in t - y * n   
 
 disappear x n = if x > n then makeTransparent 0 else makeTransparent 1 -- Makes things vanish off the screen! 
  
@@ -254,9 +255,7 @@ slide2 t = [text "Let's look at the"
               group [
             theV green
               |> move (0,tranSin (t-500) -100)
-              ,
-            
-            
+              ,                      
             text "ARIETY"
               |> customFont "Helvetica"
               |> bold
