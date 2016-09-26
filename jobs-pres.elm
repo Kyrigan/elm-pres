@@ -1,26 +1,26 @@
 import GraphicSVG exposing (..)
 import Array
 
--- don't worry about this, this type wraps up information needed for making games and animation
-
 type Message = GameTick Float GetKeyState --The tick needs to have Float and GetKeyState which handles key presses.
               | NextSlide
               | LastSlide
 
-
 -- this is the main function, and for simple animations, you would only replace the view function, or edit it below
 
 main = gameApp GameTick {
-                            model = model
+                            model = init
                         ,   view = view
                         ,   update = update
                         }
 
 -- MODEL
 
-model = {
+init = {
               t = 0 ,
-            idx = 0 
+            idx = 0 ,
+              p = False, -- Pause
+              r = 1 , -- Rewind
+              a = 1  -- Acceleration
         }
 
 -- VIEW
@@ -34,8 +34,42 @@ view model = let t = model.t
 
 update message model =
   case message of
-    GameTick tick (getKeyState,changeP1,changeP2) -> { model |
-                                       t = model.t + 3
+    GameTick tick (getKeyState,changeP1,changeP2) -> 
+                              if (getKeyState LeftArrow) == JustDown then
+                              { model |
+                                  t   = 0 ,
+                                  idx = max (model.idx - 1) 0
+                              }
+                              else if (getKeyState RightArrow) == JustDown then
+                              { model |
+                                  t   = 0 ,
+                                  idx = min (model.idx + 1) (Array.length slides - 1) 
+                              }
+                              else if (getKeyState Space) == JustDown then
+                              { model |
+                                  p = not model.p
+                              }
+                              else if (getKeyState UpArrow) == JustDown then
+                              { model |
+                                  a = min (model.a * 2) 4
+                              }
+                              else if (getKeyState DownArrow) == JustDown then
+                              { model |
+                                  a = max (model.a / 2) 0.5
+                              }
+                              else if (getKeyState (Key "R")) == JustDown then
+                              { model |
+                                  r = -model.r
+                              }
+                              else if (getKeyState Backspace) == JustDown then
+                              { model |
+                                  t = 0
+                              }
+                              else if model.p then
+                              model
+                              else
+                              { model |
+                                       t = max (model.t + 2.5 * model.a * model.r) 0
                               }
     NextSlide -> { model |
     t   = 0 ,
@@ -63,21 +97,37 @@ borders = [rect 5000 5000
               |> filled white
               |> move (0,-2750)]
 
-detectors = [rect 5000 5000
-              |> filled white
-              |> makeTransparent 0
-              |> move (2500,0)
-              |> notifyTap NextSlide,
-             rect 5000 5000
-              |> filled black
-              |> makeTransparent 0
-              |> move (-2500,0)
-              |> notifyTap LastSlide]
+detectors = [ group [ circle 40
+                        |> filled gray
+                      ,
+                      triangle 30
+                        |> filled white
+
+                      ] |> move (450,-200)
+                        |> makeTransparent 0.5
+                |> notifyTap NextSlide
+              ,
+              group [ circle 40
+                        |> filled gray
+                      ,
+                      triangle 30
+                        |> filled white
+
+                    ] |> rotate (degrees 180)
+                      |> move (-450,-200)
+                      |> makeTransparent 0.5
+                |> notifyTap LastSlide
+            ]
 
 
 -- FUNCTIONS
 
+--<< So why do I see (t - 100) or whatever value so often? >>
 
+--   Whenever I do that, I'm basically delaying what I want to happen
+--   by that value. Is it measure in seconds, frames or what? What's the unit here?
+--   To be honest, I don't know. It has a lot to do with the UPDATE function, and 
+--   what value for 'x' you are using for " t = model.t + x ".
 
 disappear x n = if x > n then makeTransparent 0 else makeTransparent 1 -- Makes things vanish off the screen! 
  
@@ -99,6 +149,8 @@ tranSin t y = if t < 0 -- Used for all permanent transitions (fading out, color 
             else if t/100 > pi/2 then y
             else sin(t/100) * y
 
+drawLine t (x1,y1) (x2,y2) = line (x1,y1) (x1 + tranSin (t) (x2 - x1), y1 + tranSin (t) (y2 - y1))
+
 -- Down here is where you will find the slides!
 -- To add more slides, simply add them to the list below.
 
@@ -107,14 +159,14 @@ slides = Array.fromList [slide1,slide2,slide3]
 --<< EVERYTHING FOR SLIDE 1 ( EXCEPT FIREBALL ) >>-
 
 slide1 t = [ 
-             text "Jobs in Computing and Software"
+             text "Computer Science Outreach"
                 |> size 50
                 |> customFont "Helvetica"
                 |> bold
                 |> centered
                 |> outlined (solid 2) maroon
                 |> move (0,-25),
-             text "Working everywhere from Silicon Valley to the comfort of your own basement." 
+             text "Every Thursday in ETB 126 starting 6:30 P.M." 
                 |> size 16
                 |> customFont "Helvetica"
                 |> centered
@@ -124,28 +176,28 @@ slide1 t = [
                 ,
             fireball
                 |> move (0,100),
-            wifi (loop (t+300) 500)
+            wifi (loop t  500)
                 |> move (80,120)
                 |> rotate (degrees -90)
-                |> fadeIn t 800 ,
+                |> fadeIn t 500 ,
             circle 100
                 |> filled white
                 |> move (10,110)
-                |> scale (1 - tranSin (t-700) 1),
+                |> scale (1 - tranSin (t-450) 1),
               rect 1000 500
                 |> filled blue
-                |> move (500 + (tranSin (t-500) 510),0)
+                |> move (500 + (tranSin (t-300) 510),0)
                 ,
               rect 1000 500
                 |> filled blue
-                |> move (-500 - (tranSin (t-500) 510),0),
+                |> move (-500 - (tranSin (t-300) 510),0),
               text "RAY"
                 |> size 50
                 |> customFont "Helvetica"
                 |> bold
                 |> filled white
                 |> move (-480,190)
-                |> appear t 200
+                |> appear t 100
                ,
               text "PRESENTS"
                 |> size 50
@@ -153,7 +205,7 @@ slide1 t = [
                 |> bold
                 |> filled white
                 |> move (-480,140)
-                |> appear t 300
+                |> appear t 200
                 ]
 
 wifi t = group [ 
@@ -181,21 +233,49 @@ slide2 t = [ text "Percentage of New STEM Jobs By Area Through 2018"
                 |> move (0,190)
                 |> fadeIn t 100
                ,
-             piechart [(0.07,optRed),(0.16,optBlue),(0.02,optGreen),(0.04,optPurple)
-                       ,(0.71,optOrange)] 0 
+             drawLine (t-950) (-100,99) (100,59)
+                |> outlined (dashed 1) black
+             ,
+             drawLine (t-950) (-100,-99) (100,-59)
+                |> outlined (dashed 1) black
+             ,
+             --<< FIRST PIECHART>>-- 
+             piechart [(0.07,optRed),
+                       (0.16,optBlue),
+                       (0.02,optGreen),
+                       (0.04,optPurple),
+                       (0.71,optOrange)] 0 
                 |> scale (tranSin (t-200) 1)
                 |> move (-100,0)
                 |> rotate (degrees 120)
+             , 
+             legend (t-350)  [("Physical Sciences - 7%",red   ,1),
+                        ("Traditional Engineering - 16%",blue  ,2),
+                        ("Mathematics - 2%",green   ,3),
+                        ("Life Sciences - 4%",purple ,4),
+                        ("Computing - 71%",orange ,5)]
+                 |> move (-385,75)
              ,
-             legend1 t
-                            ,
-             piechart [(0.27/0.71,optRed),(0.07/0.71,optBlue),(0.02/0.71,optGreen),(0.10/0.71,optPurple)
-                       ,(0.21/0.71,optOrange) ,(0.03/0.71,optGold) ,(0.01/0.71,optGray)] 0 
+             --<< SECOND PIECHART>>--             
+             piechart [(0.27/0.71,optRed),
+                       (0.07/0.71,optBlue),
+                       (0.02/0.71,optGreen),
+                       (0.10/0.71,optPurple),
+                       (0.21/0.71,optOrange),
+                       (0.03/0.71,optGold),
+                       (0.01/0.71,optGray)] 0 
                 |> scale (tranSin (t-900) 0.6)
                 |> move (100,0)
                 |> rotate (degrees 120)
              ,
-             legend2 (t-800)
+             legend (t-1000) [("Software Engineering - 27%",red   ,1),
+                             ("Computer Support - 7%",blue  ,2),
+                             ("Database Admin - 2%",green   ,3),
+                             ("System Analysis - 10%",purple ,4),
+                             ("Computer Networking - 21%",orange ,5),
+                             ("Other Computing - 3%",optGold ,6),
+                             ("CS/IS Research - 1%",optGray ,7)]
+                |> move (215,100) 
             ]
 
 optRed = rgb 211 94 95
@@ -215,26 +295,11 @@ createPie data start = case data of
                                 ) :: createPie xs (start + 360 * x)
               _ -> []
 
-legend1 t =  
-                   group (List.map (makeLabels t) [("Physical Sciences - 7%",red   ,1),
-                                               ("Traditional Engineering - 16%",blue  ,2),
-                                               ("Mathematics - 2%",green   ,3),
-                                               ("Life Sciences - 4%",purple ,4),
-                                               ("Computing - 71%",orange ,5)])
-                     |> move (-385,75)
+legend t l =  
+                   group (List.map (makeLabels t) l)
                                    
-legend2 t =  
-                   group (List.map (makeLabels t) [("Software Engineering - 27%",red   ,1),
-                                               ("Computer Support - 7%",blue  ,2),
-                                               ("Database Admin - 2%",green   ,3),
-                                               ("System Analysis - 10%",purple ,4),
-                                               ("Computer Networking - 21%",orange ,5),
-                                               ("Other Computing - 3%",optGold ,6),
-                                               ("CS/IS Research - 1%",optGray ,7)])
-                     |> move (200,100) 
 
-
-makeLabels t (label,c,n) = group [ square 10
+makeLabels t (label,c,n) = group [ square 8
                                     |> filled c
                                     |> move (-15,4)
                                      ,
@@ -243,7 +308,7 @@ makeLabels t (label,c,n) = group [ square 10
                                     |> customFont "Helvetica"
                                     |> filled c] 
                                         |> move (0,-25 * n)
-                                        |> fadeIn t (350 + n * 100)
+                                        |> fadeIn t (n * 100)
 
 --<< SLIDE 3 >>--
 
@@ -259,11 +324,58 @@ slide3 t = [text "What exciting experiences await you?"
             group( makeBullets (t-100) 
                           ["Cripling depression",
                            "Stress-induced panic attacks",
-                           "Sexual frustration",
+                           "Potential risk for substance abuse",
                            "Existential crisis",
                            "Selling your soul to Apple"] 0)
                 |> move (110,100)
+              ,
+             butHonestly t |> appear t 1000
            ]
+
+butHonestly t = group [rect 1200 600
+                            |> filled darkGreen,
+                       makeItRain (t - 1000)
+                       ,
+                       makeItRain (1000 - t)
+                       ,
+                       text "WHO CARES?"
+                          |> size 80
+                          |> customFont "Helvetica"
+                          |> bold
+                          |> centered
+                          |> filled white
+                          |> move (0,60) ,
+                       text "You're looking at a $90,000 salary!"
+                          |> size 40
+                          |> customFont "Helvetica"
+                          |> bold
+                          |> centered
+                          |> filled white
+                          |> move (0,-20)
+                          |> fadeIn t 1100
+                         ]
+
+makeBill t n = 
+  let 
+    x = (n * 2) * cos (degrees (n * 10))
+    y = (n * 2) * sin (degrees (n * 10))
+
+  in
+    group [ 
+            text "$"
+              |> size 36
+              |> customFont "Helvetica"
+              |> bold
+              |> centered
+              |> filled billGreen
+              |> move (x,y)
+              |> fadeIn (loop (t - n * 5) 300) 0
+              |> fadeOut (loop (t - n * 5 + 100) 300) 0
+               ]
+
+billGreen = rgb 133 187 101
+
+makeItRain t = group(List.map (makeBill t) [0..300])
 
 -- This is just for AUTOMATIC bullets. You are free to make
 -- more customized bullets, but they will take a bit longer.

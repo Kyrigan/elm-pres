@@ -10,3 +10,7 @@ GraphicSVG.elm and around line 85 you will find the following:
 Sub.batch ([ Time.every (1000/60*millisecond) (createTimeMessage)
 
 Decrease the number for better performance on weaker computers.
+
+September 26th: Ray speaking again, please use pres-template.elm or jobs-pres as your default 
+presentation, as I have added navigation function using the left and right arrow keys, as well
+as pause, fast-forward and rewind.

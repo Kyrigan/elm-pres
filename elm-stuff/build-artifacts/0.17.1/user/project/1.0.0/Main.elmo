@@ -1,212 +1,84 @@
-var _user$project$Main$maroon = A3(_user$project$GraphicSVG$rgb, 128, 0, 0);
-var _user$project$Main$getX = function (t) {
-	return (0 - (4 * t)) * _elm_lang$core$Basics$cos(t);
-};
-var _user$project$Main$getY = function (t) {
-	return (4 * t) * _elm_lang$core$Basics$sin(t);
-};
-var _user$project$Main$getPoint = function (t) {
-	return {
-		ctor: '_Tuple2',
-		_0: _user$project$Main$getY(t / 10),
-		_1: _user$project$Main$getX(t / 10)
-	};
-};
-var _user$project$Main$curly = _user$project$GraphicSVG$openPolygon(
-	A2(
-		_elm_lang$core$List$map,
-		_user$project$Main$getPoint,
-		_elm_lang$core$Native_List.range(10, 130)));
-var _user$project$Main$flames = A2(
-	_user$project$GraphicSVG$curve,
-	{ctor: '_Tuple2', _0: 0, _1: 0},
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 10, _1: -8},
-			{ctor: '_Tuple2', _0: 20, _1: 0}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 10, _1: 0},
-			{ctor: '_Tuple2', _0: 10, _1: 10}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 10, _1: 15},
-			{ctor: '_Tuple2', _0: 10, _1: 20}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 10, _1: 28},
-			{ctor: '_Tuple2', _0: 0, _1: 24}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 15, _1: 30},
-			{ctor: '_Tuple2', _0: 8, _1: 47}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 10, _1: 60},
-			{ctor: '_Tuple2', _0: 18, _1: 56}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: 8, _1: 72},
-			{ctor: '_Tuple2', _0: -10, _1: 50}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -5, _1: 63},
-			{ctor: '_Tuple2', _0: -16, _1: 78}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -22, _1: 90},
-			{ctor: '_Tuple2', _0: -10, _1: 98}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -35, _1: 100},
-			{ctor: '_Tuple2', _0: -36, _1: 71}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -42, _1: 95},
-			{ctor: '_Tuple2', _0: -63, _1: 100}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -55, _1: 95},
-			{ctor: '_Tuple2', _0: -59, _1: 70}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -65, _1: 80},
-			{ctor: '_Tuple2', _0: -90, _1: 75}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -100, _1: 78},
-			{ctor: '_Tuple2', _0: -100, _1: 85}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -110, _1: 70},
-			{ctor: '_Tuple2', _0: -83, _1: 55}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -100, _1: 55},
-			{ctor: '_Tuple2', _0: -105, _1: 50}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -125, _1: 33},
-			{ctor: '_Tuple2', _0: -130, _1: 50}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -130, _1: 20},
-			{ctor: '_Tuple2', _0: -105, _1: 20}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -110, _1: 20},
-			{ctor: '_Tuple2', _0: -115, _1: 10}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -120, _1: -10},
-			{ctor: '_Tuple2', _0: -130, _1: 0}),
-			A2(
-			_user$project$GraphicSVG$Pull,
-			{ctor: '_Tuple2', _0: -120, _1: -20},
-			{ctor: '_Tuple2', _0: -105, _1: -10})
-		]));
-var _user$project$Main$tail = A2(
-	_user$project$GraphicSVG$move,
-	{ctor: '_Tuple2', _0: 18, _1: -42},
-	A2(
-		_user$project$GraphicSVG$filled,
-		_user$project$GraphicSVG$white,
-		A2(
-			_user$project$GraphicSVG$curve,
-			{ctor: '_Tuple2', _0: 0, _1: 0},
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_user$project$GraphicSVG$Pull,
-					{ctor: '_Tuple2', _0: 20, _1: 8},
-					{ctor: '_Tuple2', _0: 30, _1: 33}),
-					A2(
-					_user$project$GraphicSVG$Pull,
-					{ctor: '_Tuple2', _0: 32, _1: 30},
-					{ctor: '_Tuple2', _0: 35, _1: 30}),
-					A2(
-					_user$project$GraphicSVG$Pull,
-					{ctor: '_Tuple2', _0: 22, _1: -6},
-					{ctor: '_Tuple2', _0: 5, _1: -11.5})
-				]))));
-var _user$project$Main$fireball = _user$project$GraphicSVG$group(
-	_elm_lang$core$Native_List.fromArray(
+var _user$project$Main$slide3 = function (t) {
+	return _elm_lang$core$Native_List.fromArray(
 		[
 			A2(
 			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 60, _1: 0},
-			A2(_user$project$GraphicSVG$filled, _user$project$Main$maroon, _user$project$Main$flames)),
+			{
+				ctor: '_Tuple2',
+				_0: 100 * _elm_lang$core$Basics$cos(t / 60),
+				_1: -100 * _elm_lang$core$Basics$sin(t / 60)
+			},
+			A2(
+				_user$project$GraphicSVG$filled,
+				_user$project$GraphicSVG$blue,
+				_user$project$GraphicSVG$circle(100)))
+		]);
+};
+var _user$project$Main$slide2 = function (t) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
 			A2(
 			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 10, _1: 5},
+			{
+				ctor: '_Tuple2',
+				_0: 200 * _elm_lang$core$Basics$cos(t / 80),
+				_1: 100 * _elm_lang$core$Basics$sin(t / 80)
+			},
 			A2(
-				_user$project$GraphicSVG$rotate,
-				_elm_lang$core$Basics$degrees(-90),
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$Main$maroon,
-					A2(_user$project$GraphicSVG$wedge, 55, 0.5)))),
+				_user$project$GraphicSVG$filled,
+				_user$project$GraphicSVG$green,
+				_user$project$GraphicSVG$circle(100)))
+		]);
+};
+var _user$project$Main$slide1 = function (t) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
 			A2(
 			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 10, _1: 10},
+			{
+				ctor: '_Tuple2',
+				_0: 100 * _elm_lang$core$Basics$cos(t / 100),
+				_1: 100 * _elm_lang$core$Basics$sin(t / 100)
+			},
 			A2(
-				_user$project$GraphicSVG$scale,
-				0.93,
-				_user$project$GraphicSVG$group(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A3(
-							_user$project$GraphicSVG$outlined,
-							_user$project$GraphicSVG$solid(13),
-							_user$project$GraphicSVG$white,
-							_user$project$Main$curly),
-							A2(
-							_user$project$GraphicSVG$move,
-							{ctor: '_Tuple2', _0: 5, _1: 0},
-							A2(
-								_user$project$GraphicSVG$filled,
-								_user$project$GraphicSVG$white,
-								_user$project$GraphicSVG$circle(8))),
-							_user$project$Main$tail
-						]))))
-		]));
-var _user$project$Main$createPie = F2(
-	function (data, start) {
-		var _p0 = data;
-		if ((_p0.ctor === '::') && (_p0._0.ctor === '_Tuple2')) {
-			var _p1 = _p0._0._0;
-			return A2(
-				_elm_lang$core$List_ops['::'],
+				_user$project$GraphicSVG$filled,
+				_user$project$GraphicSVG$red,
+				_user$project$GraphicSVG$circle(150))),
+			A2(
+			_user$project$GraphicSVG$filled,
+			_user$project$GraphicSVG$white,
+			_user$project$GraphicSVG$centered(
 				A2(
-					_user$project$GraphicSVG$rotate,
-					_elm_lang$core$Basics$degrees(start + (180 * _p1)),
-					A2(
-						_user$project$GraphicSVG$filled,
-						_p0._0._1,
-						A2(_user$project$GraphicSVG$wedge, 100, _p1))),
-				A2(_user$project$Main$createPie, _p0._1, start + (360 * _p1)));
-		} else {
-			return _elm_lang$core$Native_List.fromArray(
-				[]);
-		}
-	});
-var _user$project$Main$piechart = F2(
-	function (data, start) {
-		return _user$project$GraphicSVG$group(
-			A2(_user$project$Main$createPie, data, start));
-	});
-var _user$project$Main$optGray = A3(_user$project$GraphicSVG$rgb, 128, 133, 133);
-var _user$project$Main$optGold = A3(_user$project$GraphicSVG$rgb, 204, 194, 16);
-var _user$project$Main$optPurple = A3(_user$project$GraphicSVG$rgb, 144, 103, 167);
-var _user$project$Main$optOrange = A3(_user$project$GraphicSVG$rgb, 225, 151, 76);
-var _user$project$Main$optGreen = A3(_user$project$GraphicSVG$rgb, 132, 186, 91);
-var _user$project$Main$optBlue = A3(_user$project$GraphicSVG$rgb, 114, 147, 203);
-var _user$project$Main$optRed = A3(_user$project$GraphicSVG$rgb, 211, 94, 95);
+					_user$project$GraphicSVG$customFont,
+					'Helvetica',
+					_user$project$GraphicSVG$bold(
+						A2(
+							_user$project$GraphicSVG$size,
+							40,
+							_user$project$GraphicSVG$text('Enter Title Here'))))))
+		]);
+};
+var _user$project$Main$slides = _elm_lang$core$Array$fromList(
+	_elm_lang$core$Native_List.fromArray(
+		[_user$project$Main$slide1, _user$project$Main$slide2, _user$project$Main$slide3]));
 var _user$project$Main$tranSin = F2(
 	function (t, y) {
 		return (_elm_lang$core$Native_Utils.cmp(t, 0) < 0) ? 0 : ((_elm_lang$core$Native_Utils.cmp(t / 100, _elm_lang$core$Basics$pi / 2) > 0) ? y : (_elm_lang$core$Basics$sin(t / 100) * y));
+	});
+var _user$project$Main$drawLine = F3(
+	function (t, _p1, _p0) {
+		var _p2 = _p1;
+		var _p5 = _p2._1;
+		var _p4 = _p2._0;
+		var _p3 = _p0;
+		return A2(
+			_user$project$GraphicSVG$line,
+			{ctor: '_Tuple2', _0: _p4, _1: _p5},
+			{
+				ctor: '_Tuple2',
+				_0: _p4 + A2(_user$project$Main$tranSin, t, _p3._0 - _p4),
+				_1: _p5 + A2(_user$project$Main$tranSin, t, _p3._1 - _p5)
+			});
 	});
 var _user$project$Main$trans = F2(
 	function (t, y) {
@@ -222,286 +94,6 @@ var _user$project$Main$fadeIn = F2(
 		return _user$project$GraphicSVG$makeTransparent(
 			A2(_user$project$Main$tranSin, t - n, 1));
 	});
-var _user$project$Main$wifi = function (t) {
-	return A3(
-		_user$project$Main$fadeOut,
-		t,
-		400,
-		_user$project$GraphicSVG$group(
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A3(
-					_user$project$Main$fadeIn,
-					t,
-					100,
-					A3(
-						_user$project$GraphicSVG$outlined,
-						_user$project$GraphicSVG$solid(8),
-						_user$project$Main$maroon,
-						A2(
-							_user$project$GraphicSVG$curve,
-							{ctor: '_Tuple2', _0: -20, _1: 10},
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_user$project$GraphicSVG$Pull,
-									{ctor: '_Tuple2', _0: 0, _1: 35},
-									{ctor: '_Tuple2', _0: 20, _1: 10})
-								])))),
-					A3(
-					_user$project$Main$fadeIn,
-					t,
-					200,
-					A3(
-						_user$project$GraphicSVG$outlined,
-						_user$project$GraphicSVG$solid(8),
-						_user$project$Main$maroon,
-						A2(
-							_user$project$GraphicSVG$curve,
-							{ctor: '_Tuple2', _0: -35, _1: 20},
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_user$project$GraphicSVG$Pull,
-									{ctor: '_Tuple2', _0: 0, _1: 60},
-									{ctor: '_Tuple2', _0: 35, _1: 20})
-								])))),
-					A3(
-					_user$project$Main$fadeIn,
-					t,
-					300,
-					A3(
-						_user$project$GraphicSVG$outlined,
-						_user$project$GraphicSVG$solid(8),
-						_user$project$Main$maroon,
-						A2(
-							_user$project$GraphicSVG$curve,
-							{ctor: '_Tuple2', _0: -50, _1: 30},
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_user$project$GraphicSVG$Pull,
-									{ctor: '_Tuple2', _0: 0, _1: 85},
-									{ctor: '_Tuple2', _0: 50, _1: 30})
-								]))))
-				])));
-};
-var _user$project$Main$makeLabels = F2(
-	function (t, _p2) {
-		var _p3 = _p2;
-		var _p5 = _p3._2;
-		var _p4 = _p3._1;
-		return A3(
-			_user$project$Main$fadeIn,
-			t,
-			350 + (_p5 * 100),
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 0, _1: -25 * _p5},
-				_user$project$GraphicSVG$group(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_user$project$GraphicSVG$move,
-							{ctor: '_Tuple2', _0: -15, _1: 4},
-							A2(
-								_user$project$GraphicSVG$filled,
-								_p4,
-								_user$project$GraphicSVG$square(10))),
-							A2(
-							_user$project$GraphicSVG$filled,
-							_p4,
-							A2(
-								_user$project$GraphicSVG$customFont,
-								'Helvetica',
-								A2(
-									_user$project$GraphicSVG$size,
-									12,
-									_user$project$GraphicSVG$text(_p3._0))))
-						]))));
-	});
-var _user$project$Main$legend1 = function (t) {
-	return A2(
-		_user$project$GraphicSVG$move,
-		{ctor: '_Tuple2', _0: -385, _1: 75},
-		_user$project$GraphicSVG$group(
-			A2(
-				_elm_lang$core$List$map,
-				_user$project$Main$makeLabels(t),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						{ctor: '_Tuple3', _0: 'Physical Sciences - 7%', _1: _user$project$GraphicSVG$red, _2: 1},
-						{ctor: '_Tuple3', _0: 'Traditional Engineering - 16%', _1: _user$project$GraphicSVG$blue, _2: 2},
-						{ctor: '_Tuple3', _0: 'Mathematics - 2%', _1: _user$project$GraphicSVG$green, _2: 3},
-						{ctor: '_Tuple3', _0: 'Life Sciences - 4%', _1: _user$project$GraphicSVG$purple, _2: 4},
-						{ctor: '_Tuple3', _0: 'Computing - 71%', _1: _user$project$GraphicSVG$orange, _2: 5}
-					]))));
-};
-var _user$project$Main$legend2 = function (t) {
-	return A2(
-		_user$project$GraphicSVG$move,
-		{ctor: '_Tuple2', _0: 200, _1: 100},
-		_user$project$GraphicSVG$group(
-			A2(
-				_elm_lang$core$List$map,
-				_user$project$Main$makeLabels(t),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						{ctor: '_Tuple3', _0: 'Software Engineering - 27%', _1: _user$project$GraphicSVG$red, _2: 1},
-						{ctor: '_Tuple3', _0: 'Computer Support - 7%', _1: _user$project$GraphicSVG$blue, _2: 2},
-						{ctor: '_Tuple3', _0: 'Database Admin - 2%', _1: _user$project$GraphicSVG$green, _2: 3},
-						{ctor: '_Tuple3', _0: 'System Analysis - 10%', _1: _user$project$GraphicSVG$purple, _2: 4},
-						{ctor: '_Tuple3', _0: 'Computer Networking - 21%', _1: _user$project$GraphicSVG$orange, _2: 5},
-						{ctor: '_Tuple3', _0: 'Other Computing - 3%', _1: _user$project$Main$optGold, _2: 6},
-						{ctor: '_Tuple3', _0: 'CS/IS Research - 1%', _1: _user$project$Main$optGray, _2: 7}
-					]))));
-};
-var _user$project$Main$slide2 = function (t) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A3(
-			_user$project$Main$fadeIn,
-			t,
-			100,
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 0, _1: 190},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$black,
-					_user$project$GraphicSVG$centered(
-						_user$project$GraphicSVG$bold(
-							A2(
-								_user$project$GraphicSVG$customFont,
-								'Helvetica',
-								A2(
-									_user$project$GraphicSVG$size,
-									24,
-									_user$project$GraphicSVG$text('Percentage of New STEM Jobs By Area Through 2018')))))))),
-			A2(
-			_user$project$GraphicSVG$rotate,
-			_elm_lang$core$Basics$degrees(120),
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: -100, _1: 0},
-				A2(
-					_user$project$GraphicSVG$scale,
-					A2(_user$project$Main$tranSin, t - 200, 1),
-					A2(
-						_user$project$Main$piechart,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{ctor: '_Tuple2', _0: 7.0e-2, _1: _user$project$Main$optRed},
-								{ctor: '_Tuple2', _0: 0.16, _1: _user$project$Main$optBlue},
-								{ctor: '_Tuple2', _0: 2.0e-2, _1: _user$project$Main$optGreen},
-								{ctor: '_Tuple2', _0: 4.0e-2, _1: _user$project$Main$optPurple},
-								{ctor: '_Tuple2', _0: 0.71, _1: _user$project$Main$optOrange}
-							]),
-						0)))),
-			_user$project$Main$legend1(t),
-			A2(
-			_user$project$GraphicSVG$rotate,
-			_elm_lang$core$Basics$degrees(120),
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 100, _1: 0},
-				A2(
-					_user$project$GraphicSVG$scale,
-					A2(_user$project$Main$tranSin, t - 900, 0.6),
-					A2(
-						_user$project$Main$piechart,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{ctor: '_Tuple2', _0: 0.27 / 0.71, _1: _user$project$Main$optRed},
-								{ctor: '_Tuple2', _0: 7.0e-2 / 0.71, _1: _user$project$Main$optBlue},
-								{ctor: '_Tuple2', _0: 2.0e-2 / 0.71, _1: _user$project$Main$optGreen},
-								{ctor: '_Tuple2', _0: 0.1 / 0.71, _1: _user$project$Main$optPurple},
-								{ctor: '_Tuple2', _0: 0.21 / 0.71, _1: _user$project$Main$optOrange},
-								{ctor: '_Tuple2', _0: 3.0e-2 / 0.71, _1: _user$project$Main$optGold},
-								{ctor: '_Tuple2', _0: 1.0e-2 / 0.71, _1: _user$project$Main$optGray}
-							]),
-						0)))),
-			_user$project$Main$legend2(t - 800)
-		]);
-};
-var _user$project$Main$makeBullets = F3(
-	function (t, l, start) {
-		var _p6 = l;
-		if (_p6.ctor === '::') {
-			return A2(
-				_elm_lang$core$List_ops['::'],
-				_user$project$GraphicSVG$group(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A3(
-							_user$project$Main$fadeIn,
-							t,
-							100,
-							A2(
-								_user$project$GraphicSVG$move,
-								{ctor: '_Tuple2', _0: -200, _1: start},
-								A2(
-									_user$project$GraphicSVG$filled,
-									_user$project$GraphicSVG$black,
-									A2(
-										_user$project$GraphicSVG$customFont,
-										'Helvetica',
-										A2(
-											_user$project$GraphicSVG$size,
-											20,
-											_user$project$GraphicSVG$text(_p6._0)))))),
-							A3(
-							_user$project$Main$fadeIn,
-							t,
-							100,
-							A2(
-								_user$project$GraphicSVG$move,
-								{ctor: '_Tuple2', _0: -220, _1: start + 5},
-								A2(
-									_user$project$GraphicSVG$filled,
-									_user$project$GraphicSVG$black,
-									_user$project$GraphicSVG$circle(5))))
-						])),
-				A3(_user$project$Main$makeBullets, t - 100, _p6._1, start - 35));
-		} else {
-			return _elm_lang$core$Native_List.fromArray(
-				[]);
-		}
-	});
-var _user$project$Main$slide3 = function (t) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A3(
-			_user$project$Main$fadeIn,
-			t,
-			100,
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 0, _1: 190},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$black,
-					_user$project$GraphicSVG$centered(
-						_user$project$GraphicSVG$bold(
-							A2(
-								_user$project$GraphicSVG$customFont,
-								'Helvetica',
-								A2(
-									_user$project$GraphicSVG$size,
-									24,
-									_user$project$GraphicSVG$text('What exciting experiences await you?')))))))),
-			A2(
-			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 110, _1: 100},
-			_user$project$GraphicSVG$group(
-				A3(
-					_user$project$Main$makeBullets,
-					t - 100,
-					_elm_lang$core$Native_List.fromArray(
-						['Cripling depression', 'Stress-induced panic attacks', 'Sexual frustration', 'Existential crisis', 'Selling your soul to Apple']),
-					0)))
-		]);
-};
 var _user$project$Main$appear = F2(
 	function (x, n) {
 		return (_elm_lang$core$Native_Utils.cmp(x, n) > 0) ? _user$project$GraphicSVG$makeTransparent(1) : _user$project$GraphicSVG$makeTransparent(0);
@@ -512,132 +104,6 @@ var _user$project$Main$loop = F2(
 			_elm_lang$core$Basics$floor(t / n));
 		return t - (y * n);
 	});
-var _user$project$Main$slide1 = function (t) {
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 0, _1: -25},
-			A3(
-				_user$project$GraphicSVG$outlined,
-				_user$project$GraphicSVG$solid(2),
-				_user$project$Main$maroon,
-				_user$project$GraphicSVG$centered(
-					_user$project$GraphicSVG$bold(
-						A2(
-							_user$project$GraphicSVG$customFont,
-							'Helvetica',
-							A2(
-								_user$project$GraphicSVG$size,
-								50,
-								_user$project$GraphicSVG$text('Jobs in Computing and Software'))))))),
-			A3(
-			_user$project$Main$fadeIn,
-			t,
-			800,
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 0, _1: -90},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$darkRed,
-					_user$project$GraphicSVG$centered(
-						A2(
-							_user$project$GraphicSVG$customFont,
-							'Helvetica',
-							A2(
-								_user$project$GraphicSVG$size,
-								16,
-								_user$project$GraphicSVG$text('Working everywhere from Silicon Valley to the comfort of your own basement.'))))))),
-			A2(
-			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 0, _1: 100},
-			_user$project$Main$fireball),
-			A3(
-			_user$project$Main$fadeIn,
-			t,
-			800,
-			A2(
-				_user$project$GraphicSVG$rotate,
-				_elm_lang$core$Basics$degrees(-90),
-				A2(
-					_user$project$GraphicSVG$move,
-					{ctor: '_Tuple2', _0: 80, _1: 120},
-					_user$project$Main$wifi(
-						A2(_user$project$Main$loop, t + 300, 500))))),
-			A2(
-			_user$project$GraphicSVG$scale,
-			1 - A2(_user$project$Main$tranSin, t - 700, 1),
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: 10, _1: 110},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$white,
-					_user$project$GraphicSVG$circle(100)))),
-			A2(
-			_user$project$GraphicSVG$move,
-			{
-				ctor: '_Tuple2',
-				_0: 500 + A2(_user$project$Main$tranSin, t - 500, 510),
-				_1: 0
-			},
-			A2(
-				_user$project$GraphicSVG$filled,
-				_user$project$GraphicSVG$red,
-				A2(_user$project$GraphicSVG$rect, 1000, 500))),
-			A2(
-			_user$project$GraphicSVG$move,
-			{
-				ctor: '_Tuple2',
-				_0: -500 - A2(_user$project$Main$tranSin, t - 500, 510),
-				_1: 0
-			},
-			A2(
-				_user$project$GraphicSVG$filled,
-				_user$project$GraphicSVG$red,
-				A2(_user$project$GraphicSVG$rect, 1000, 500))),
-			A3(
-			_user$project$Main$appear,
-			t,
-			200,
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: -480, _1: 190},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$white,
-					_user$project$GraphicSVG$bold(
-						A2(
-							_user$project$GraphicSVG$customFont,
-							'Helvetica',
-							A2(
-								_user$project$GraphicSVG$size,
-								50,
-								_user$project$GraphicSVG$text('RAY'))))))),
-			A3(
-			_user$project$Main$appear,
-			t,
-			300,
-			A2(
-				_user$project$GraphicSVG$move,
-				{ctor: '_Tuple2', _0: -480, _1: 140},
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$white,
-					_user$project$GraphicSVG$bold(
-						A2(
-							_user$project$GraphicSVG$customFont,
-							'Helvetica',
-							A2(
-								_user$project$GraphicSVG$size,
-								50,
-								_user$project$GraphicSVG$text('PRESENTS')))))))
-		]);
-};
-var _user$project$Main$slides = _elm_lang$core$Array$fromList(
-	_elm_lang$core$Native_List.fromArray(
-		[_user$project$Main$slide1, _user$project$Main$slide2, _user$project$Main$slide3]));
 var _user$project$Main$disappear = F2(
 	function (x, n) {
 		return (_elm_lang$core$Native_Utils.cmp(x, n) > 0) ? _user$project$GraphicSVG$makeTransparent(0) : _user$project$GraphicSVG$makeTransparent(1);
@@ -679,12 +145,59 @@ var _user$project$Main$default = function (t) {
 };
 var _user$project$Main$update = F2(
 	function (message, model) {
-		var _p7 = message;
-		switch (_p7.ctor) {
+		var _p6 = message;
+		switch (_p6.ctor) {
 			case 'GameTick':
-				return _elm_lang$core$Native_Utils.update(
+				var _p7 = _p6._1._0;
+				return _elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$LeftArrow),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
 					model,
-					{t: model.t + 3});
+					{
+						t: 0,
+						idx: A2(_elm_lang$core$Basics$max, model.idx - 1, 0)
+					}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$RightArrow),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						t: 0,
+						idx: A2(
+							_elm_lang$core$Basics$min,
+							model.idx + 1,
+							_elm_lang$core$Array$length(_user$project$Main$slides) - 1)
+					}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$Space),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						p: _elm_lang$core$Basics$not(model.p)
+					}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$UpArrow),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						a: A2(_elm_lang$core$Basics$min, model.a * 2, 4)
+					}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$DownArrow),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						a: A2(_elm_lang$core$Basics$max, model.a / 2, 0.5)
+					}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(
+						_user$project$GraphicSVG$Key('R')),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{r: 0 - model.r}) : (_elm_lang$core$Native_Utils.eq(
+					_p7(_user$project$GraphicSVG$Backspace),
+					_user$project$GraphicSVG$JustDown) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{t: 0}) : (model.p ? model : _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						t: A2(_elm_lang$core$Basics$max, model.t + ((2.5 * model.a) * model.r), 0)
+					}))))))));
 			case 'NextSlide':
 				return _elm_lang$core$Native_Utils.update(
 					model,
@@ -704,7 +217,7 @@ var _user$project$Main$update = F2(
 					});
 		}
 	});
-var _user$project$Main$model = {t: 0, idx: 0};
+var _user$project$Main$init = {t: 0, idx: 0, p: false, r: 1, a: 1};
 var _user$project$Main$LastSlide = {ctor: 'LastSlide'};
 var _user$project$Main$NextSlide = {ctor: 'NextSlide'};
 var _user$project$Main$detectors = _elm_lang$core$Native_List.fromArray(
@@ -713,28 +226,47 @@ var _user$project$Main$detectors = _elm_lang$core$Native_List.fromArray(
 		_user$project$GraphicSVG$notifyTap,
 		_user$project$Main$NextSlide,
 		A2(
-			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: 2500, _1: 0},
+			_user$project$GraphicSVG$makeTransparent,
+			0.5,
 			A2(
-				_user$project$GraphicSVG$makeTransparent,
-				0,
-				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$white,
-					A2(_user$project$GraphicSVG$rect, 5000, 5000))))),
+				_user$project$GraphicSVG$move,
+				{ctor: '_Tuple2', _0: 450, _1: -200},
+				_user$project$GraphicSVG$group(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_user$project$GraphicSVG$filled,
+							_user$project$GraphicSVG$gray,
+							_user$project$GraphicSVG$circle(40)),
+							A2(
+							_user$project$GraphicSVG$filled,
+							_user$project$GraphicSVG$white,
+							_user$project$GraphicSVG$triangle(30))
+						]))))),
 		A2(
 		_user$project$GraphicSVG$notifyTap,
 		_user$project$Main$LastSlide,
 		A2(
-			_user$project$GraphicSVG$move,
-			{ctor: '_Tuple2', _0: -2500, _1: 0},
+			_user$project$GraphicSVG$makeTransparent,
+			0.5,
 			A2(
-				_user$project$GraphicSVG$makeTransparent,
-				0,
+				_user$project$GraphicSVG$move,
+				{ctor: '_Tuple2', _0: -450, _1: -200},
 				A2(
-					_user$project$GraphicSVG$filled,
-					_user$project$GraphicSVG$black,
-					A2(_user$project$GraphicSVG$rect, 5000, 5000)))))
+					_user$project$GraphicSVG$rotate,
+					_elm_lang$core$Basics$degrees(180),
+					_user$project$GraphicSVG$group(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_user$project$GraphicSVG$filled,
+								_user$project$GraphicSVG$gray,
+								_user$project$GraphicSVG$circle(40)),
+								A2(
+								_user$project$GraphicSVG$filled,
+								_user$project$GraphicSVG$white,
+								_user$project$GraphicSVG$triangle(30))
+							]))))))
 	]);
 var _user$project$Main$view = function (model) {
 	var slide = A2(
@@ -759,5 +291,5 @@ var _user$project$Main$main = {
 	main: A2(
 		_user$project$GraphicSVG$gameApp,
 		_user$project$Main$GameTick,
-		{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$Main$update})
+		{model: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update})
 };

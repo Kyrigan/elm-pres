@@ -1,26 +1,26 @@
 import GraphicSVG exposing (..)
 import Array
 
--- don't worry about this, this type wraps up information needed for making games and animation
-
 type Message = GameTick Float GetKeyState --The tick needs to have Float and GetKeyState which handles key presses.
               | NextSlide
               | LastSlide
 
-
 -- this is the main function, and for simple animations, you would only replace the view function, or edit it below
 
 main = gameApp GameTick {
-                            model = model
+                            model = init
                         ,   view = view
                         ,   update = update
                         }
 
 -- MODEL
 
-model = {
+init = {
               t = 0 ,
-            idx = 0 
+            idx = 0 ,
+              p = False, -- Pause
+              r = 1 , -- Rewind
+              a = 1  -- Acceleration
         }
 
 -- VIEW
@@ -34,8 +34,42 @@ view model = let t = model.t
 
 update message model =
   case message of
-    GameTick tick (getKeyState,changeP1,changeP2) -> { model |
-                                       t = model.t + 4
+    GameTick tick (getKeyState,changeP1,changeP2) -> 
+                              if (getKeyState LeftArrow) == JustDown then
+                              { model |
+                                  t   = 0 ,
+                                  idx = max (model.idx - 1) 0
+                              }
+                              else if (getKeyState RightArrow) == JustDown then
+                              { model |
+                                  t   = 0 ,
+                                  idx = min (model.idx + 1) (Array.length slides - 1) 
+                              }
+                              else if (getKeyState Space) == JustDown then
+                              { model |
+                                  p = not model.p
+                              }
+                              else if (getKeyState UpArrow) == JustDown then
+                              { model |
+                                  a = min (model.a * 2) 4
+                              }
+                              else if (getKeyState DownArrow) == JustDown then
+                              { model |
+                                  a = max (model.a / 2) 0.5
+                              }
+                              else if (getKeyState (Key "R")) == JustDown then
+                              { model |
+                                  r = -model.r
+                              }
+                              else if (getKeyState Backspace) == JustDown then
+                              { model |
+                                  t = 0
+                              }
+                              else if model.p then
+                              model
+                              else
+                              { model |
+                                       t = max (model.t + 2.5 * model.a * model.r) 0
                               }
     NextSlide -> { model |
     t   = 0 ,
@@ -63,24 +97,42 @@ borders = [rect 5000 5000
               |> filled white
               |> move (0,-2750)]
 
-detectors = [rect 5000 5000
-              |> filled white
-              |> makeTransparent 0
-              |> move (2500,0)
-              |> notifyTap NextSlide,
-             rect 5000 5000
-              |> filled black
-              |> makeTransparent 0
-              |> move (-2500,0)
-              |> notifyTap LastSlide]
+detectors = [ group [ circle 40
+                        |> filled gray
+                      ,
+                      triangle 30
+                        |> filled white
+
+                      ] |> move (450,-200)
+                        |> makeTransparent 0.5
+                |> notifyTap NextSlide
+              ,
+              group [ circle 40
+                        |> filled gray
+                      ,
+                      triangle 30
+                        |> filled white
+
+                    ] |> rotate (degrees 180)
+                      |> move (-450,-200)
+                      |> makeTransparent 0.5
+                |> notifyTap LastSlide
+            ]
 
 
 -- FUNCTIONS
 
+--<< So why do I see (t - 100) or whatever value so often? >>
+
+--   Whenever I do that, I'm basically delaying what I want to happen
+--   by that value. Is it measure in seconds, frames or what? What's the unit here?
+--   To be honest, I don't know. It has a lot to do with the UPDATE function, and 
+--   what value for 'x' you are using for " t = model.t + x ".
+
 disappear x n = if x > n then makeTransparent 0 else makeTransparent 1 -- Makes things vanish off the screen! 
  
-mod x n = let y = toFloat (floor (x / n)) -- This function is how I make things loop!
-          in x - y * n                                        
+loop t n = let y = toFloat (floor (t / n)) -- This function is how I make things loop!
+           in t - y * n                                           
 
 appear x n =    if x > n then makeTransparent 1 else makeTransparent 0 -- Makes things suddenly appear on the screen!
                                           
@@ -97,96 +149,32 @@ tranSin t y = if t < 0 -- Used for all permanent transitions (fading out, color 
             else if t/100 > pi/2 then y
             else sin(t/100) * y
 
----
-
-
+drawLine t (x1,y1) (x2,y2) = line (x1,y1) (x1 + tranSin (t) (x2 - x1), y1 + tranSin (t) (y2 - y1))
 
 -- Down here is where you will find the slides!
 -- To add more slides, simply add them to the list below.
 
-slides = Array.fromList [slide1,slide2]
+slides = Array.fromList [slide1, slide2, slide3]
 
-slide1 t = [ text "Your cool title here"
-                |> size 50
+--<< EVERYTHING FOR SLIDE 1 ( EXCEPT FIREBALL ) >>-
+
+slide1 t = [ circle 150
+                |> filled red 
+                |> move (100 * cos(t/100), 100 * sin(t/100)) ,
+             text "Enter Title Here"
+                |> size 40
+                |> bold
+                |> customFont "Helvetica"
                 |> centered
-                |> filled black
-                |> move (0,20),
-             text "Enter name here" 
-                |> size 20
-                |> centered
-                |> filled black
-                |> move (0,-20)]
-
-slide2 t = [fireball t]
-
--- My beautiful Mac Eng Fireball
-
-fireball t = group [
-  flames
-    |> filled (glowing t)
-    |> move (60,0)
-  ,
-  wedge 55 0.5
-    |> filled (glowing t)
-    |> rotate (degrees -90)
-    |> move (10,5)
-  ,
-  group [
-  curly t
-    |> outlined (solid 13) white
-  ,
-  circle 8
-    |> filled white
-    |> move (5,0)
-  ,
-  tail 
-   ] |> scale (0.93) |> move (10,10)
-  ]
-
-tail = curve (0,0) [Pull (20,8) (30,33),
-                    Pull (32,30) (35,30),
-               Pull (22,-6) (5,-11.5)]
-    |> filled white
-    |> move (18,-42)
-
--- You see this here
-
-flames = curve (0,0)  [ Pull (10,-8) (20,0),
-                        Pull (10,0) (10,10),
-                        Pull (10,15) (10,20),
-                        Pull (10,28) (0,24),
-                        Pull (15,30) (8,47),
-                        Pull (10,60) (18,56),
-                        Pull (8,72) (-10,50),
-                        Pull (-5,63) (-16,78),
-                        Pull (-22,90) (-10,98),
-                        Pull (-35,100) (-36,71),
-                        Pull (-42,95) (-63,100),
-                        Pull (-55,95) (-59,70),
-                        Pull (-65,80) (-90,75),
-                        Pull (-100,78) (-100,85),
-                        Pull (-110,70) (-83,55),
-                        Pull (-100,55) (-105,50),
-                        Pull (-125,33) (-130,50),
-                        Pull (-130,20) (-105,20),
-                        Pull (-110,20) (-115,10),
-                        Pull (-120,-10) (-130,0),
-                        Pull (-120,-20) (-105,-10)]
-
--- Drove me insane
-
-curly t = openPolygon (List.map getPoint [10..130])
-
-getPoint t = (getY (t/10), getX (t/10))
-
-getY t = (4*t) * sin(t)
-getX t = -(4*t) * cos(t)
-
-maroon = rgb 128 0 0
-
-glowing t = let r = 218 - 90*abs(cos (degrees t))
-                g = 100 - 100*abs(cos (degrees t))
-                b = 0
-            in rgb r g b    
-
--- © Ray Winardi 2016, in memory of 3 hours of his life
+                |> filled white
+                ]
+     
+slide2 t = [ circle 100
+                |> filled green
+                |> move (200 * cos(t/80), 100 * sin(t/80))
+                 ]
+             
+slide3 t = [ circle 100
+                |> filled blue 
+                |> move (100 * cos(t/60), -100 * sin(t/60))
+                ]
