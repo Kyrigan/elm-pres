@@ -28,7 +28,7 @@ init = {
 view model = let t = model.t 
                  slide = Maybe.withDefault default (Array.get model.idx slides)
 
-             in collage 1000 500 (slide t ++ borders ++ detectors)
+             in collage 1000 500 (slide t ++ borders ++ navigators)
 
 -- UPDATE
 
@@ -97,7 +97,7 @@ borders = [rect 5000 5000
               |> filled white
               |> move (0,-2750)]
 
-detectors = [ group [ circle 40
+navigators = [ group [ circle 40
                         |> filled gray
                       ,
                       triangle 30

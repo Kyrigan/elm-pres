@@ -28,7 +28,7 @@ init = {
 view model = let t = model.t 
                  slide = Maybe.withDefault default (Array.get model.idx slides)
 
-             in collage 1000 500 (slide t ++ borders ++ detectors)
+             in collage 1000 500 (slide t ++ borders ++ navigators)
 
 -- UPDATE
 
@@ -97,7 +97,7 @@ borders = [rect 5000 5000
               |> filled white
               |> move (0,-2750)]
 
-detectors = [ group [ circle 40
+navigators = [ group [ circle 40
                         |> filled gray
                       ,
                       triangle 30
@@ -154,7 +154,7 @@ drawLine t (x1,y1) (x2,y2) = line (x1,y1) (x1 + tranSin (t) (x2 - x1), y1 + tran
 -- Down here is where you will find the slides!
 -- To add more slides, simply add them to the list below.
 
-slides = Array.fromList [slide1,slide2,slide3]
+slides = Array.fromList [slide4,slide1,slide2,slide3]
 
 --<< EVERYTHING FOR SLIDE 1 ( EXCEPT FIREBALL ) >>-
 
@@ -462,5 +462,74 @@ getX t = -(4*t) * cos(t)
 maroon = rgb 128 0 0
 
 
+slide5 t = [ rect 500 20
+              |> filled darkRed ,
+             rect 20 500
+              |> filled darkRed,
+             rect 200 100
+              |> filled darkGray
+              |> move (0,250),
+             circle 150
+              |> filled darkGray,
+             circle 120
+              |> filled white,
+             heart
+              |> move (0,-20)
+             ]
 
--- © Ray Winardi 2016, in memory of 3 hours of his life
+slide4 t = [ circle 80 |> filled yellow,
+             rect 160 400 |> filled yellow
+                          |> move (0,-200)
+             ,
+             curve (-50,0) [Pull (0,-50) (50,0),
+                            Pull (0,50) (-50,0)
+                            
+                        ]
+                |> filled white
+
+                ,
+             circle 25
+                |> filled brown,
+             circle 12
+                |> filled black ,
+             curve (-51,0) [Pull (0,51*sin(t/50)) (51,0),
+                            Pull (0,51) (-51,0)
+                            
+                        ]
+                |> filled yellow
+                 ]
+
+heart = group [circle 50
+                 |> filled pink 
+                 |> move (0,50)
+                 ,
+               circle 50
+                 |> filled pink
+                 |> move (50,0)
+                 ,
+               square 100
+                 |> filled pink] |> rotate (degrees 45)
+
+diamond t = group [ polygon [ (50,0), (0,100),(25,0),(0,-100)]
+                   |> filled darkGreen ,
+                  polygon [ (-50,0), (0,100),(-25,0),(0,-100)]
+                   |> filled darkGreen 
+                   ,
+          polygon [ (50,0), (0,100), (-50,0), (0,-100) ]
+              |> filled (rgb (151 + 73*(cos(t/10))) (185 - 51*cos(t/10)) (246 + 3*cos(t/10) )) -- rgb(224, 134, 249)
+              |> makeTransparent 0.8 ]
+            
+star t c = polygon [ (100*cos(degrees 0),100*sin(degrees 0)),
+                 (50*cos(degrees 36),50*sin(degrees 36)),
+                 (100*cos(degrees 72),100*sin(degrees 72)),
+                 (50*cos(degrees 108),50*sin(degrees 108)),
+                 (100*cos(degrees 144),100*sin(degrees 144)),
+                 (50*cos(degrees 180),50*sin(degrees 180)),
+                 (100*cos(degrees 216),100*sin(degrees 216)),
+                 (50*cos(degrees 252),50*sin(degrees 252)),
+                 (100*cos(degrees 288),100*sin(degrees 288)),
+                 (50*cos(degrees 314),50*sin(degrees 314)) ] 
+                  |> filled c
+                  |> rotate (degrees t)
+
+-- © Ray Winardi 2016, in memory of 4 hours of his life
